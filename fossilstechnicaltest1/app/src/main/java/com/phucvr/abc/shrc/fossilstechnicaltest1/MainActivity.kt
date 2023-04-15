@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.core.content.ContextCompat
+import androidx.core.view.WindowCompat
 import com.phucvr.abc.shrc.fossilstechnicaltest1.core.FileManager
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
@@ -22,7 +25,6 @@ class MainActivity : ComponentActivity() {
         viewModel.getAllData()
         setContent {
             FossilsTechnicalTest1Theme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
