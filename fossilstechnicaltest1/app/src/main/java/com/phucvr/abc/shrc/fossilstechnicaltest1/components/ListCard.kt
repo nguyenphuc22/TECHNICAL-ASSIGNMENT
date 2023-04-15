@@ -18,11 +18,11 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 @Composable
-fun ListCard(list : SnapshotStateList<iFile>) {
+fun ListCard(list : SnapshotStateList<iFile>, onClickCard: (iFile) -> Unit = {}) {
     LazyColumn {
         this.items(list) { iFile ->
             Card(file = iFile) {
-                list.remove(it)
+                onClickCard(it)
             }
         }
     }

@@ -1,6 +1,7 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice
 
 import android.os.Environment
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
@@ -15,9 +16,10 @@ class RepositoryLocalDevice : iRepository {
     override fun getAllStorage(): ArrayList<iFile> {
         val result = ArrayList<iFile>()
         val internalStore = Environment.getExternalStorageDirectory()
-        for (file in internalStore.listFiles()!!) {
-            addAllFiles(result,file)
-        }
+        addAllFiles(result,internalStore)
+//        for (file in internalStore.listFiles()!!) {
+//            addAllFiles(result,internalStore)
+//        }
         data.addAll(result)
         return data
     }
@@ -34,6 +36,7 @@ class RepositoryLocalDevice : iRepository {
     }
 
     private fun addAllFiles(result : ArrayList<iFile>,file : java.io.File) {
+        Log.d("NickSeven","${file.canonicalFile} | ${file.name}")
         if (file.isFile) {
             result.add(File(file))
             return

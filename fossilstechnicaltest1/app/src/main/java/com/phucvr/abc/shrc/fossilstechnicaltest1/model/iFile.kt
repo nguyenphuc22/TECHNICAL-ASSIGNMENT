@@ -18,4 +18,6 @@ interface iFile {
     fun isFile() : Boolean
 
     fun isFolder() : Boolean
+
+    fun findWithPath(path : String) : iFile?
 }

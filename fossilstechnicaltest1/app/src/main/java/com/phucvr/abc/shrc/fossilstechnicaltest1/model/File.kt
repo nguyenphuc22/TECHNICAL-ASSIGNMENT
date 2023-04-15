@@ -71,4 +71,10 @@ class File : iFile {
     override fun isFolder(): Boolean {
         return false
     }
+
+    override fun findWithPath(path: String): iFile? {
+        if (this.path.equals(path))
+            return this
+        return null
+    }
 }

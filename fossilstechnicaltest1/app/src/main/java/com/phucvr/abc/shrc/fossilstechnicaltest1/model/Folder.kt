@@ -85,6 +85,17 @@ class Folder : iFile {
         return true
     }
 
+    override fun findWithPath(path: String): iFile? {
+        if (this.path.equals(path))
+            return this
+        for (iFile in this.children) {
+            val temp = iFile.findWithPath(path)
+            if (temp != null )
+                return temp
+        }
+        return null
+    }
+
     fun add(file : iFile) {
         this.children.add(file)
     }
