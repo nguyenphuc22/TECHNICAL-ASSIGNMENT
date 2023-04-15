@@ -3,6 +3,7 @@ package com.phucvr.abc.shrc.fossilstechnicaltest1.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -17,13 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 
 @Composable
-fun CardState(dp: Dp,modifier: Modifier) {
+fun CardState(dp: Dp, modifier: Modifier, drawable: Int) {
     Box(modifier = modifier
         .size(dp)
         .clip(CircleShape)
-        .background(Color.Gray))
+        .background(Color.Gray)
+        .padding(2.dp))
     {
-        Image(painter = painterResource(id = R.drawable.ic_download),
+        Image(painter = painterResource(id = drawable),
             contentDescription = "",
             modifier = Modifier.align(Alignment.Center))
     }
@@ -32,5 +34,5 @@ fun CardState(dp: Dp,modifier: Modifier) {
 @Preview
 @Composable
 fun CardStatePreview() {
-    CardState(10.dp,Modifier)
+    CardState(10.dp, Modifier, R.drawable.ic_download)
 }

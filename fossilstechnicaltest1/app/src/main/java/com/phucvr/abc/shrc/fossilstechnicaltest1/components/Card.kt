@@ -27,7 +27,7 @@ fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
         .height(IntrinsicSize.Min)
         .clickable { onClickCard(file) }) {
 
-        CardImage()
+        CardImage(file)
 
         Column(modifier = Modifier.fillMaxWidth()
             .fillMaxHeight()
