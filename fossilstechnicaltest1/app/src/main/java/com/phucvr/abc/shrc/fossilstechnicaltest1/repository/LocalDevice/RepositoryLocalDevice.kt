@@ -45,12 +45,7 @@ class RepositoryLocalDevice : iRepository {
             val temp = ArrayList<iFile>()
             if (file.listFiles() != null) {
                 for (item in file.listFiles()!!) {
-                    if (item.isFile) {
-                        addAllFiles(result,item)
-                    }
-                    else {
-                        addAllFiles(temp,item)
-                    }
+                    addAllFiles(temp,item)
                 }
             }
             result.add(Folder(temp,file))

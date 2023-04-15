@@ -17,6 +17,9 @@ class FileManager private constructor(){
     }
 
     fun backTo() : String {
+        if (stackCurrentPath.empty()) {
+            return allData.first().getPath()
+        }
         return stackCurrentPath.pop()
     }
 
@@ -32,7 +35,11 @@ class FileManager private constructor(){
 
     fun getCurrentFiles() : iFile {
         for (iFile in this.allData) {
-            val result = iFile.findWithPath(stackCurrentPath.peek())
+            var path = allData.first().getPath()
+            if (!stackCurrentPath.empty()) {
+                path = stackCurrentPath.peek()
+            }
+            val result = iFile.findWithPath(path)
             if (result != null) {
                 return result
             }

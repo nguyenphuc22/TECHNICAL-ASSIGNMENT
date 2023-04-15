@@ -25,6 +25,7 @@ fun CardImage(iFile: iFile) {
                 .align(Alignment.Center))
 
         val drawable = Settings.STATE_ICON_OF_CARD.get(iFile.getName())
+
         if (drawable != null) {
             CardState(17.dp,Modifier.align(Alignment.BottomEnd),drawable)
         }

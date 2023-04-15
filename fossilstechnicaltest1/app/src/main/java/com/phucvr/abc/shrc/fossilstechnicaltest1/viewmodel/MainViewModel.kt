@@ -24,7 +24,16 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
     }
 
     fun refreshData() {
-        listData.addAll(repository.getAllStorage())
+        val data = repository.getAllStorage()
+        fileManager.setData(data)
+        fileManager.getCurrentFiles().let {
+            if (it.isFolder())
+            {
+                val folder = it as Folder
+                listData.addAll(folder.getChildren())
+            }
+        }
+        listData.addAll(data)
     }
 
     override fun onClickFolder(iFile: iFile) {
