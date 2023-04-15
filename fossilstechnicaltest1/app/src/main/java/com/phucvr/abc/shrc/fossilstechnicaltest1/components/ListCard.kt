@@ -1,23 +1,34 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.components
 
+import android.annotation.SuppressLint
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.tooling.preview.Preview
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
+import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 @Composable
-fun ListCard(list : ArrayList<iFile>) {
+fun ListCard(list : SnapshotStateList<iFile>) {
     LazyColumn {
-        items(list) { ifile ->
-            Card(file = ifile)
+        this.items(list) { iFile ->
+            Card(file = iFile) {
+                list.remove(it)
+            }
         }
     }
 }
 
+@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun ListCardPreview() {
@@ -26,5 +37,7 @@ fun ListCardPreview() {
     val arrayList = arrayListOf<iFile>()
     arrayList.add(a)
     arrayList.add(b)
-    ListCard(arrayList)
+    val mutableList = mutableStateListOf<iFile>()
+    mutableList.addAll(arrayList)
+    ListCard(mutableList)
 }

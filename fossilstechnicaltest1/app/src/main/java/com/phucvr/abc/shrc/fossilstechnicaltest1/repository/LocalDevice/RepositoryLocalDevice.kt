@@ -10,20 +10,20 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.iRepository
 
 class RepositoryLocalDevice : iRepository {
 
-    private val data: MutableLiveData<ArrayList<iFile>> = MutableLiveData<ArrayList<iFile>>()
+    private val data = ArrayList<iFile>()
 
-    override fun getAllStorage(): LiveData<ArrayList<iFile>> {
+    override fun getAllStorage(): ArrayList<iFile> {
         val result = ArrayList<iFile>()
         val internalStore = Environment.getExternalStorageDirectory()
-        for (file in internalStore.listFiles()) {
+        for (file in internalStore.listFiles()!!) {
             addAllFiles(result,file)
         }
-        data.postValue(result)
+        data.addAll(result)
         return data
     }
 
-    override fun getData(): LiveData<ArrayList<iFile>> {
-        data.value?.let {
+    override fun getData(): ArrayList<iFile> {
+        data.let {
             if (it.isEmpty()) {
                 return getAllStorage()
             } else {
@@ -41,7 +41,7 @@ class RepositoryLocalDevice : iRepository {
         if (file.isDirectory) {
             val temp = ArrayList<iFile>()
             if (file.listFiles() != null) {
-                for (item in file.listFiles()) {
+                for (item in file.listFiles()!!) {
                     if (item.isFile) {
                         addAllFiles(result,item)
                     }

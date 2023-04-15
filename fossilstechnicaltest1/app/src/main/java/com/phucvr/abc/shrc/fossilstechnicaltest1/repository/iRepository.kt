@@ -5,7 +5,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 interface iRepository {
 
-    fun getAllStorage() : LiveData<ArrayList<iFile>>
+    fun getAllStorage() : ArrayList<iFile>
 
-    fun getData() : LiveData<ArrayList<iFile>>
+    fun getData() : ArrayList<iFile>
 }

@@ -1,6 +1,7 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material3.MaterialTheme
@@ -18,12 +19,13 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilTime
 
 @Composable
-fun Card(file: iFile) {
+fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
     Row(modifier = Modifier
         .background(Color.White)
         .padding(8.dp)
         .fillMaxWidth()
-        .height(IntrinsicSize.Min)) {
+        .height(IntrinsicSize.Min)
+        .clickable { onClickCard(file) }) {
 
         CardImage()
 
