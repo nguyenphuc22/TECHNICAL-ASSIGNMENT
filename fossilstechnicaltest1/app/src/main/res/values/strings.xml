@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Fossil\'s Technical Test #1</string>
+
+    <string name="count">%1$d items</string>
 </resources>

@@ -15,7 +15,9 @@ class RepositoryLocalDevice : iRepository {
     override fun getAllStorage(): LiveData<ArrayList<iFile>> {
         val result = ArrayList<iFile>()
         val internalStore = Environment.getExternalStorageDirectory()
-        addAllFiles(result,internalStore)
+        for (file in internalStore.listFiles()) {
+            addAllFiles(result,file)
+        }
         data.postValue(result)
         return data
     }

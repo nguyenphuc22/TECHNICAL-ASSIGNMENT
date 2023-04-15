@@ -22,6 +22,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.lifecycleScope
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
+import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.ui.theme.FossilsTechnicalTest1Theme
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 import java.io.File
@@ -41,32 +42,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(viewModel)
-                    Toast.makeText(this,"PhucVR",Toast.LENGTH_SHORT).show()
+                    ViewFilesScreen(viewModel)
                 }
             }
         }
-        initOberse()
-    }
-
-    private fun initOberse() {
-        viewModel.listData.observe(this, androidx.lifecycle.Observer {
-            for (item in it) {
-                Log.d("Nick","item File ${item.getPath()}")
-                if (item.isFolder()) {
-                    val l = item as Folder
-                    for (item1 in l.getChildren()) {
-                        Log.d("Nick","item File ${item1.getPath()}")
-                        if (item1.isFolder()) {
-                            val l1 = item1 as Folder
-                            for (item11 in l1.getChildren()) {
-                                Log.d("Nick","item \t File1 ${item11.getPath()}")
-                            }
-                        }
-                    }
-                }
-            }
-        })
     }
 
 }
