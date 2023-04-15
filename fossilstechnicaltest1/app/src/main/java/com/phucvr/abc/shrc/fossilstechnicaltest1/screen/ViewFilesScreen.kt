@@ -1,5 +1,6 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
@@ -16,6 +17,10 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
                 viewModel.onClickFile(it)
             }
         }
+    }
+
+    BackHandler {
+        viewModel.onClickBack()
     }
 
 }

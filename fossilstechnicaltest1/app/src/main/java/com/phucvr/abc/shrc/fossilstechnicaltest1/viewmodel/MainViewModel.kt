@@ -43,5 +43,14 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
     }
 
     override fun onClickBack() {
+        fileManager.backTo()
+        fileManager.getCurrentFiles().let {
+            if (it.isFolder())
+            {
+                val folder = it as Folder
+                listData.clear()
+                listData.addAll(folder.getChildren())
+            }
+        }
     }
 }
