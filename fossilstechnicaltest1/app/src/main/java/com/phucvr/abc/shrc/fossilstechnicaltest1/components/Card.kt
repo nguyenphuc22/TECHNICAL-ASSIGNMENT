@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
-import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilTime
+import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilConvert
 
 @Composable
 fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
@@ -42,17 +42,26 @@ fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
                 .fillMaxHeight()
             ) {
 
-                Text(text = UtilTime.convertLongToTime(file.getLastModified()),
+                Text(text = UtilConvert.convertLongToTime(file.getLastModified()),
                     maxLines = 1,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
                     modifier = Modifier.align(alignment = Alignment.TopStart))
 
-                Text(text = stringResource(R.string.count,  file.getCount()),
-                    maxLines = 1,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
-                    modifier = Modifier.align(alignment = Alignment.TopEnd))
+                if (file.isFolder()) {
+                    Text(text = stringResource(R.string.count,  file.getCount()),
+                        maxLines = 1,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                        modifier = Modifier.align(alignment = Alignment.TopEnd))
+                } else {
+                    Text(text = UtilConvert.convertLongToSize1000(file.getSize()),
+                        maxLines = 1,
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                        modifier = Modifier.align(alignment = Alignment.TopEnd))
+                }
+
 
                 Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = .2f),modifier = Modifier.align(Alignment.BottomEnd))
 
