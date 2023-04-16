@@ -30,6 +30,7 @@ class FileManager private constructor(){
     fun setData(data : ArrayList<iFile>) {
         allData.clear()
         allData.addAll(data)
+        stackCurrentPath.clear()
         stackCurrentPath.add(data.first().getPath())
     }
 

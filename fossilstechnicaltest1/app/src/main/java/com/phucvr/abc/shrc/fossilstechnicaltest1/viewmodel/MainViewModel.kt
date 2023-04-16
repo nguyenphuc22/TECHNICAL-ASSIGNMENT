@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.compose.runtime.mutableStateListOf
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
+import com.phucvr.abc.shrc.fossilstechnicaltest1.MainActivity
 import com.phucvr.abc.shrc.fossilstechnicaltest1.core.FileManager
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
@@ -12,6 +13,11 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.iRepository
 
 
 class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClickFolder{
+
+    companion object {
+        private val TAG = MainViewModel::class.java.simpleName
+    }
+
     val listData = mutableStateListOf<iFile>()
     val fileManager = FileManager.getInstance()
     private var callBack: (iFile) -> Unit = {}
@@ -35,10 +41,10 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
             if (it.isFolder())
             {
                 val folder = it as Folder
+                listData.clear()
                 listData.addAll(folder.getChildren())
             }
         }
-        listData.addAll(data)
     }
 
     override fun onClickFolder(iFile: iFile) {

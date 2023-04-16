@@ -8,8 +8,13 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.iRepository
+import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 
 class RepositoryLocalDevice : iRepository {
+
+    companion object {
+        private val TAG = RepositoryLocalDevice::class.java.simpleName
+    }
 
     private val data = ArrayList<iFile>()
 
@@ -17,6 +22,7 @@ class RepositoryLocalDevice : iRepository {
         val result = ArrayList<iFile>()
         val internalStore = Environment.getExternalStorageDirectory()
         addAllFiles(result,internalStore)
+        data.clear()
         data.addAll(result)
         return data
     }
@@ -33,7 +39,7 @@ class RepositoryLocalDevice : iRepository {
     }
 
     private fun addAllFiles(result : ArrayList<iFile>,file : java.io.File) {
-        Log.d("NickSeven","${file.canonicalFile} | ${file.name}")
+        Log.d(TAG,"${file.canonicalFile} | ${file.name}")
         if (file.isFile) {
             result.add(File(file))
             return
