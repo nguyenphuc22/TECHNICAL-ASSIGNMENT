@@ -22,7 +22,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilConvert
 fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
     Row(modifier = Modifier
         .background(Color.White)
-        .padding(8.dp)
+        .padding(top = 8.dp, bottom = 8.dp)
         .fillMaxWidth()
         .height(IntrinsicSize.Min)
         .clickable { onClickCard(file) }) {
@@ -30,8 +30,8 @@ fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
         CardImage(file)
 
         Column(modifier = Modifier.fillMaxWidth()
-            .fillMaxHeight()
-            .padding(start = 12.dp)) {
+            .fillMaxHeight())
+        {
 
             Text(text = file.getName(),
                 maxLines = 1,

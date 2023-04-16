@@ -48,6 +48,10 @@ class FileManager private constructor(){
         return allData.first()
     }
 
+    fun isRootFolder(): Boolean {
+        return this.stackCurrentPath.size == 1 || this.stackCurrentPath.isEmpty()
+    }
+
     companion object {
         @JvmStatic
         fun getInstance(): FileManager {

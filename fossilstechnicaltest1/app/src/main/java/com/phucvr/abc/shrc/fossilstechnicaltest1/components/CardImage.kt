@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
@@ -18,7 +19,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
 
 @Composable
 fun CardImage(iFile: iFile) {
-    Box(modifier = Modifier.padding(10.dp))
+    Box(modifier = Modifier.padding(end = 10.dp, top = 10.dp, bottom = 10.dp))
     {
         if (iFile.isFolder()) {
             Image(painter = painterResource(id = R.drawable.ic_outline_folder_24) ,
@@ -32,7 +33,9 @@ fun CardImage(iFile: iFile) {
 
                 Image(painter = rememberAsyncImagePainter(model = iFile.getPath()) ,
                     contentDescription = "",
-                    Modifier.align(Alignment.Center).size(30.dp),
+                    Modifier
+                        .align(Alignment.Center)
+                        .size(30.dp),
                     contentScale = ContentScale.Fit)
 
             } else {

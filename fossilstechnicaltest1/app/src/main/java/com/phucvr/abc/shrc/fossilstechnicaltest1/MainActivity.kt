@@ -5,17 +5,26 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.lifecycleScope
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.compose.rememberImagePainter
+import coil.imageLoader
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.PermissionScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
@@ -61,7 +70,7 @@ class MainActivity : ComponentActivity() {
                     if (permission == true) {
                         viewModel.getAllData()
                         LaunchedEffect(true) {
-                            if (viewModel.getModeList().equals(MainViewModel.MODE_LIST_ESSENTIAL)) {
+                            if (viewModel.isModeEssentials()) {
                                 viewModel.turnOnModeEssentials()
                             } else {
                                 viewModel.turnOffModeEssentials()
@@ -89,7 +98,7 @@ class MainActivity : ComponentActivity() {
     override fun onRestart() {
         super.onRestart()
         viewModel.refreshData()
-        if (viewModel.getModeList().equals(MainViewModel.MODE_LIST_ESSENTIAL)) {
+        if (viewModel.isModeEssentials()) {
             viewModel.turnOnModeEssentials()
         } else {
             viewModel.turnOffModeEssentials()

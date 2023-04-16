@@ -1,12 +1,9 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel
 
-import android.content.Intent
-import android.net.Uri
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
-import androidx.core.content.ContextCompat.startActivity
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import com.phucvr.abc.shrc.fossilstechnicaltest1.MainActivity
 import com.phucvr.abc.shrc.fossilstechnicaltest1.core.FileManager
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
@@ -29,9 +26,12 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
     private var TYPE_SORT = TypeSort.NAME
     private var callBack: (iFile) -> Unit = {}
 
+
     private val menusLeft = listOf(MODE_LIST_ESSENTIAL,MODE_LIST_ALL)
     private val menusRight = listOf(TypeSort.TYPE.name,TypeSort.DATE.name,TypeSort.NAME.name,TypeSort.SIZE.name)
     private var modeList = menusLeft.first()
+
+    var isShowLeftMenus = mutableStateOf(1.0f)
 
     fun getMenuLeft() : List<String> {
         return menusLeft
@@ -89,6 +89,7 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
                 listData.addAll(folder.getChildren())
             }
         }
+        showOnOffMenusLeft()
     }
 
     override fun onClickFile(iFile: iFile) {
@@ -105,8 +106,20 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
                 listData.addAll(folder.getChildren())
             }
         }
+        showOnOffMenusLeft()
     }
 
+    fun showOnOffMenusLeft() {
+        if (fileManager.isRootFolder()) {
+            isShowLeftMenus.value = 1.0F
+        } else {
+            isShowLeftMenus.value = 0.0F
+        }
+    }
+
+    fun isRootFolder() : Boolean {
+        return fileManager.isRootFolder()
+    }
     fun callBackFile(callBack: (iFile) -> Unit = {}) {
         this.callBack = callBack
     }
@@ -124,6 +137,13 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
 
     fun turnOffModeEssentials() {
         getAllData()
+    }
+
+    fun isModeEssentials() : Boolean {
+        if (this.modeList.equals(MODE_LIST_ESSENTIAL)) {
+            return true
+        }
+        return false
     }
 
     fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {
