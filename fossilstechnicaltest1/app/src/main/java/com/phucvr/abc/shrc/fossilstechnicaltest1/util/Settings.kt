@@ -17,5 +17,11 @@ class Settings {
             "zip" to R.drawable.ic_outline_folder_zip)
 
         val EXTENSION_PICTURE = listOf<String>("jpg","png")
+
+        val LIST_FOLDER_ESSENTIAL = listOf<String>("DCIM","Document","Download","Movies","Music","Notifications","Pictures","Recordings","Ringtones")
     }
+}
+
+enum class TypeSort {
+    NAME,DATE,TYPE,SIZE
 }
