@@ -17,9 +17,6 @@ class RepositoryLocalDevice : iRepository {
         val result = ArrayList<iFile>()
         val internalStore = Environment.getExternalStorageDirectory()
         addAllFiles(result,internalStore)
-//        for (file in internalStore.listFiles()!!) {
-//            addAllFiles(result,internalStore)
-//        }
         data.addAll(result)
         return data
     }

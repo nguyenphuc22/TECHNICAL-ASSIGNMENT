@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -48,7 +49,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     if (permission == true) {
-                        viewModel.refreshData()
+                        viewModel.getAllData()
                         ViewFilesScreen(viewModel)
                     }
                 }
@@ -64,6 +65,11 @@ class MainActivity : ComponentActivity() {
             intent.setDataAndType(uri, "*/*")
             startActivity(intent)
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("NickSeven","Phuc")
     }
     // check initially if the permission is granted
 }
