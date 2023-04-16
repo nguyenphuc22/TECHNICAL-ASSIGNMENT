@@ -32,6 +32,7 @@ fun Header(
     selectedRight : String,
     listMenuItemRight : List<String>,
     isIncreasedSort : Boolean,
+    alphaMenusRight : Float,
     onClickMenuLeft : (String) -> Unit = {},
     onClickMenuRight : (Pair<String, Boolean>) -> Unit = {})
 {
@@ -68,6 +69,7 @@ fun Header(
         Row(
             Modifier
                 .align(Alignment.TopEnd)
+                .alpha(alphaMenusRight)
                 .wrapContentSize(Alignment.TopStart)) {
             Text(text = "Name", style = MaterialTheme.typography.titleMedium, modifier = Modifier.clickable {
                 expandedRight = true
@@ -104,5 +106,5 @@ fun Header(
 @Preview
 @Composable
 fun HeaderPreview() {
-    Header(selectedLeft = "Essentials", listMenuItemLeft = listOf("Essentials","All"), alphaMenusLeft =  1.0f, selectedRight = TypeSort.TYPE.name, listMenuItemRight = listOf(TypeSort.TYPE.name,TypeSort.NAME.name,TypeSort.SIZE.name,TypeSort.DATE.name),false)
+    Header(selectedLeft = "Essentials", listMenuItemLeft = listOf("Essentials","All"), alphaMenusLeft =  1.0f, selectedRight = TypeSort.TYPE.name, listMenuItemRight = listOf(TypeSort.TYPE.name,TypeSort.NAME.name,TypeSort.SIZE.name,TypeSort.DATE.name), alphaMenusRight = 1.0f, isIncreasedSort = false)
 }

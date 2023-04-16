@@ -21,7 +21,8 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
     val listFiles = viewModel.listData
     val menusLeft = viewModel.getMenuLeft()
     val menusRight = viewModel.getMenuRight()
-    var alpha = viewModel.isShowLeftMenus.value
+    var alphaLeft = viewModel.isShowLeftMenus.value
+    var alphaRight = viewModel.isShowRightMenus.value
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.White)
@@ -36,10 +37,11 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
         Header(
             viewModel.getModeList(),
             menusLeft,
-            alpha,
+            alphaLeft,
             viewModel.getTypeSort().first.name,
             menusRight,
             viewModel.getTypeSort().second,
+            alphaRight,
             onClickMenuLeft = {
                 viewModel.setModeList(it)
                 if (it.equals(menusLeft.first())) {
@@ -65,6 +67,9 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
 
         if (viewModel.listData.isEmpty()) {
             EmptyScreen()
+            viewModel.hideRightMenus()
+        } else {
+            viewModel.showRightMenus()
         }
     }
 

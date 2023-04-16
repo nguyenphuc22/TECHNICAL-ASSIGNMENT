@@ -32,6 +32,7 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
     private var modeList = menusLeft.first()
 
     var isShowLeftMenus = mutableStateOf(1.0f)
+    var isShowRightMenus = mutableStateOf(1.0f)
 
     fun getMenuLeft() : List<String> {
         return menusLeft
@@ -156,6 +157,14 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
             }
             sort()
         }
+    }
+
+    fun hideRightMenus() {
+        this.isShowRightMenus.value = 0.0F
+    }
+
+    fun showRightMenus() {
+        this.isShowRightMenus.value = 1.0F
     }
 
     fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {
