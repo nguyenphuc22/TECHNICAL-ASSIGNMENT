@@ -17,12 +17,12 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 
 @Composable
-fun Header(selectedLeft : String, listMenuItemLeft : List<String>,selectedRight : String, listMenuItemRight : List<String>) {
+fun Header(selectedLeft : String, listMenuItemLeft : List<String>,selectedRight : String, listMenuItemRight : List<String>, isIncreasedSort : Boolean,onClickMenuLeft : (String) -> Unit = {},onClickMenuRight : (Pair<String, Boolean>) -> Unit = {}) {
     var expandedLeft by remember { mutableStateOf(false) }
     var expandedRight by remember { mutableStateOf(false) }
     var selectedModeLeft by remember { mutableStateOf(selectedLeft) }
     var selectedModeRight by remember { mutableStateOf(selectedRight) }
-    var stateIcon by remember { mutableStateOf(false) }
+    var stateIcon by remember { mutableStateOf(isIncreasedSort) }
     Box(
         Modifier
             .fillMaxWidth()
@@ -32,7 +32,15 @@ fun Header(selectedLeft : String, listMenuItemLeft : List<String>,selectedRight 
             .wrapContentSize(Alignment.TopStart)
             .clickable { expandedLeft = true }) {
             Text(text = selectedModeLeft, style = MaterialTheme.typography.titleMedium)
-            MyMenuPopup(expandedLeft, listMenuItemLeft,selectedModeLeft, selectedChanged = {selectedModeLeft = it}, onTurnOff = {expandedLeft = it })
+            MyMenuPopup(expandedLeft,
+                listMenuItemLeft,
+                selectedModeLeft,
+                selectedChanged = {selectedModeLeft = it},
+                onTurnOff =
+                {
+                    expandedLeft = it
+                    onClickMenuLeft(selectedModeLeft)
+                })
             Spacer(modifier = Modifier.width(5.dp))
             Icon(painter = painterResource(id = R.drawable.ic_arrow_drop_down), contentDescription = "")
         }
@@ -41,13 +49,29 @@ fun Header(selectedLeft : String, listMenuItemLeft : List<String>,selectedRight 
                 .align(Alignment.TopEnd)
                 .wrapContentSize(Alignment.TopStart)) {
             Text(text = "Name", style = MaterialTheme.typography.titleMedium, modifier = Modifier.clickable { expandedRight = true } )
-            MyMenuPopup(expandedRight, listMenuItemRight,selectedModeRight, selectedChanged = {selectedModeRight = it}, onTurnOff = {expandedRight = it })
+            MyMenuPopup(expandedRight,
+                listMenuItemRight,
+                selectedModeRight,
+                selectedChanged = { selectedModeRight = it},
+                onTurnOff =
+                {
+                    expandedRight = it
+                    onClickMenuRight(Pair(selectedModeRight,stateIcon))
+                })
             Text(text = " | ", style = MaterialTheme.typography.titleMedium)
 
             if (stateIcon) {
-                Icon(painter = painterResource(id = R.drawable.ic_arrow_down), contentDescription = "", modifier = Modifier.clickable { stateIcon = !stateIcon })
+                Icon(painter = painterResource(id = R.drawable.ic_arrow_up), contentDescription = "",
+                    modifier = Modifier.clickable {
+                        stateIcon = !stateIcon
+                        onClickMenuRight(Pair(selectedModeRight,stateIcon))
+                    })
             } else {
-                Icon(painter = painterResource(id = R.drawable.ic_arrow_up), contentDescription = "", modifier = Modifier.clickable { stateIcon = !stateIcon })
+                Icon(painter = painterResource(id = R.drawable.ic_arrow_down), contentDescription = "",
+                    modifier = Modifier.clickable {
+                        stateIcon = !stateIcon
+                        onClickMenuRight(Pair(selectedModeRight,stateIcon))
+                    })
             }
         }
     }
@@ -57,5 +81,5 @@ fun Header(selectedLeft : String, listMenuItemLeft : List<String>,selectedRight 
 @Preview
 @Composable
 fun HeaderPreview() {
-    Header(selectedLeft = "Essentials", listMenuItemLeft = listOf("Essentials","All"), selectedRight = TypeSort.TYPE.name, listMenuItemRight = listOf(TypeSort.TYPE.name,TypeSort.NAME.name,TypeSort.SIZE.name,TypeSort.DATE.name))
+    Header(selectedLeft = "Essentials", listMenuItemLeft = listOf("Essentials","All"), selectedRight = TypeSort.TYPE.name, listMenuItemRight = listOf(TypeSort.TYPE.name,TypeSort.NAME.name,TypeSort.SIZE.name,TypeSort.DATE.name),false)
 }

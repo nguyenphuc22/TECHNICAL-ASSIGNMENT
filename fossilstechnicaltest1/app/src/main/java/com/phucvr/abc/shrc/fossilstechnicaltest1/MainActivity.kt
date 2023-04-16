@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.lifecycleScope
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.PermissionScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
@@ -22,6 +23,9 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.ui.theme.FossilsTechnicalTest1T
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilIntent
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilPermission.Companion.isPermissionGranted
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -56,6 +60,14 @@ class MainActivity : ComponentActivity() {
 
                     if (permission == true) {
                         viewModel.getAllData()
+                        LaunchedEffect(true) {
+                            if (viewModel.getModeList().equals(MainViewModel.MODE_LIST_ESSENTIAL)) {
+                                viewModel.turnOnModeEssentials()
+                            } else {
+                                viewModel.turnOffModeEssentials()
+                            }
+                            viewModel.sort()
+                        }
                         ViewFilesScreen(viewModel)
                     }
                 }
@@ -77,6 +89,12 @@ class MainActivity : ComponentActivity() {
     override fun onRestart() {
         super.onRestart()
         viewModel.refreshData()
+        if (viewModel.getModeList().equals(MainViewModel.MODE_LIST_ESSENTIAL)) {
+            viewModel.turnOnModeEssentials()
+        } else {
+            viewModel.turnOffModeEssentials()
+        }
+        viewModel.sort()
     }
 }
 

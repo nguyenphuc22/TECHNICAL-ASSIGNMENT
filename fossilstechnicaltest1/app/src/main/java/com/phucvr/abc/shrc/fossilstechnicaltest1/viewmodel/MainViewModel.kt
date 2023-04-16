@@ -2,6 +2,7 @@ package com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
@@ -18,14 +19,39 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
 
     companion object {
         private val TAG = MainViewModel::class.java.simpleName
+        const val MODE_LIST_ESSENTIAL = "Essentials"
+        const val MODE_LIST_ALL = "All"
     }
 
     val listData = mutableStateListOf<iFile>()
     val fileManager = FileManager.getInstance()
     private var isIncreasedSort = true
     private var TYPE_SORT = TypeSort.NAME
-
     private var callBack: (iFile) -> Unit = {}
+
+    private val menusLeft = listOf(MODE_LIST_ESSENTIAL,MODE_LIST_ALL)
+    private val menusRight = listOf(TypeSort.TYPE.name,TypeSort.DATE.name,TypeSort.NAME.name,TypeSort.SIZE.name)
+    private var modeList = menusLeft.first()
+
+    fun getMenuLeft() : List<String> {
+        return menusLeft
+    }
+
+    fun getModeList() : String {
+        return modeList
+    }
+
+    fun getTypeSort() : Pair<TypeSort,Boolean> {
+        return Pair(TYPE_SORT,isIncreasedSort)
+    }
+
+    fun getMenuRight() : List<String> {
+        return menusRight
+    }
+
+    fun setModeList(mode : String) {
+        this.modeList = mode
+    }
 
     fun getAllData() {
         val data = repository.getData()
@@ -34,6 +60,7 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
             if (it.isFolder())
             {
                 val folder = it as Folder
+                listData.clear()
                 listData.addAll(folder.getChildren())
             }
         }
@@ -99,7 +126,13 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
         getAllData()
     }
 
-    fun sort() {
+    fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {
+        typeSort?.let {
+            TYPE_SORT = typeSort
+        }
+        isIncreased?.let {
+            isIncreasedSort = isIncreased
+        }
         when(TYPE_SORT) {
             TypeSort.NAME -> {
                 if (isIncreasedSort) {
@@ -124,9 +157,9 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
             }
             TypeSort.SIZE -> {
                 if (isIncreasedSort) {
-                    this.listData.sortBy { it.getSize() }
+                    this.listData.sortBy { it.getCount() }
                 } else {
-                    this.listData.sortByDescending { it.getSize() }
+                    this.listData.sortByDescending { it.getCount() }
                 }
             }
         }
