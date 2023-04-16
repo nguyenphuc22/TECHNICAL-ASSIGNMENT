@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,7 +23,7 @@ fun CardState(dp: Dp, modifier: Modifier, drawable: Int) {
     Box(modifier = modifier
         .size(dp)
         .clip(CircleShape)
-        .background(Color.Gray)
+        .background(MaterialTheme.colorScheme.primary)
         .padding(2.dp))
     {
         Image(painter = painterResource(id = drawable),

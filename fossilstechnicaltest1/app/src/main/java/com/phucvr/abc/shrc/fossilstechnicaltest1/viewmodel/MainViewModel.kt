@@ -146,6 +146,18 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
         return false
     }
 
+    fun backStack() {
+        onClickBack()
+        if (isRootFolder()) {
+            if (isModeEssentials()) {
+                turnOnModeEssentials()
+            } else {
+                turnOffModeEssentials()
+            }
+            sort()
+        }
+    }
+
     fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {
         typeSort?.let {
             TYPE_SORT = typeSort

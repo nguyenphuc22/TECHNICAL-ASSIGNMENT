@@ -1,26 +1,18 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.screen
 
 import android.annotation.SuppressLint
-import android.provider.MediaStore
-import android.widget.VideoView
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.Header
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
-import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
+import com.phucvr.abc.shrc.fossilstechnicaltest1.components.TopAppBar
 
 
 @SuppressLint("MutableCollectionMutableState")
@@ -34,6 +26,12 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
         .fillMaxSize()
         .background(Color.White)
         .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
+
+        TopAppBar() {
+            viewModel.backStack()
+        }
+        
+        Spacer(modifier = Modifier.size(15.dp))
 
         Header(
             viewModel.getModeList(),
@@ -55,6 +53,8 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
             }
         )
 
+        Spacer(modifier = Modifier.size(15.dp))
+
         ListCard(list = listFiles) {
             if (it.isFolder()) {
                 viewModel.onClickFolder(it)
@@ -69,15 +69,7 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
     }
 
     BackHandler {
-        viewModel.onClickBack()
-        if (viewModel.isRootFolder()) {
-            if (viewModel.isModeEssentials()) {
-                viewModel.turnOnModeEssentials()
-            } else {
-                viewModel.turnOffModeEssentials()
-            }
-            viewModel.sort()
-        }
+        viewModel.backStack()
     }
 
 }
