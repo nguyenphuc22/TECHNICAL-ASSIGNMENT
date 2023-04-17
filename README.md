@@ -19,7 +19,7 @@ REQUIREMENT
 
 ## My Solution
 
-### Status
+### Feature
 
 |                          Permission                          |                             Sort                             |                            Search                            |                           OpenFile                           |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
@@ -29,6 +29,24 @@ REQUIREMENT
 
 ### Architect
 
-
+In this project. I use MVVM architecture. This architecture will help me divide the data-logic-view into separate parts. Because this project in the future will be able to support different types of data such as data stored in the cloud. So in Respository and Core, I decided to structure it as an interface class. Objects like View - ViewModel will work through this interface. Thus, later supporting the cloud or data from new sources will be easy
 
  ![diagram](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/diagram.png)
+
+- Components: These include single views, configuring a small component of a screen. Programmers can assemble them into a complete screen
+
+- Core: These include single views, configuring a small component of a screen. Programmers can assemble them into a complete screen
+
+- Model: Objects store information and work methods. Below is the File and Folder object diagram designed according to the composite pattern.
+
+  ![classdiagram](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/classdiagram.png)
+
+- Repository: This is where to query data
+
+- Routing: This is where to query data
+
+- Screen: This is where to query data
+
+- Util: Files that support the feature
+
+- ViewModel: State storage, information sharing, UI logic control
