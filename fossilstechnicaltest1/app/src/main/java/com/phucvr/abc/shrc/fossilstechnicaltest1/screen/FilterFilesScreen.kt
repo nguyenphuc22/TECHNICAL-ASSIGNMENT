@@ -83,6 +83,10 @@ fun FilterFilesScreen(viewModel: FilterViewModel) {
     }
 
     BackHandler {
-        viewModel.backStack()
+        if (viewModel.isRootFolder()) {
+            MyRouter.getInstance().navigateTo(Screen.VIEW_FILES)
+        } else {
+            viewModel.backStack()
+        }
     }
 }
