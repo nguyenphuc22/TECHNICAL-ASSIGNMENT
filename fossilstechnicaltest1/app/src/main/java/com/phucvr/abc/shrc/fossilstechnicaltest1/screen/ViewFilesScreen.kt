@@ -74,6 +74,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
                     when(it) {
                         Settings.OPTION_EDIT -> {
                             actionState = true
+                            actionSelectPath = false
                             listSelected.clear()
                         }
 
