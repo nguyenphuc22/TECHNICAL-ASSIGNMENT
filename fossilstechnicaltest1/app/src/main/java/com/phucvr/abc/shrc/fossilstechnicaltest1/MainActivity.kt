@@ -60,20 +60,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ManagerScreen(viewModel,this)
+                    ManagerScreen(viewModel,this) {
+                        UtilIntent.openFile(this,it)
+                    }
                 }
             }
-        }
-        initEventCLick()
-    }
-
-    fun initEventCLick() {
-        clickOpenSpecFile()
-    }
-
-    fun clickOpenSpecFile() {
-        viewModel.callBackFile {
-            UtilIntent.openFile(this,it)
         }
     }
 

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.*
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
+import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter.Holder.INSTANCE
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.FilterFilesScreen
@@ -38,7 +39,7 @@ enum class Screen() {
 }
 
 @Composable
-fun ManagerScreen(viewModel: MainViewModel, context: Context) {
+fun ManagerScreen(viewModel: MainViewModel, context: Context, callBackOpenFile: (iFile) -> Unit = {}) {
     when(MyRouter.getInstance().currentScreen.value) {
         Screen.VIEW_FILES -> {
             viewModel.getAllData()
@@ -51,10 +52,20 @@ fun ManagerScreen(viewModel: MainViewModel, context: Context) {
                 viewModel.sort()
             }
             ViewFilesScreen(viewModel)
+
+            viewModel.callBackFile {
+                callBackOpenFile(it)
+            }
+
         }
         Screen.FILTER_FILES -> {
             val filterViewModel = FilterViewModel(RepositoryLocalDevice())
             FilterFilesScreen(filterViewModel)
+
+            filterViewModel.callBackFile {
+                callBackOpenFile(it)
+            }
+
         }
         Screen.VIEW_PERMISSION_REQUEST -> {
             if (UtilPermission.isPermissionGranted(context = context, Manifest.permission.READ_EXTERNAL_STORAGE)) {
