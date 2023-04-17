@@ -16,3 +16,19 @@ REQUIREMENT
 - Other improvements or new features are a huge plus.
 - You need to keep in mind that the app may extend its features in the near future to be fulfilled as a file explorer app so the app architecture should be scalable & flexible.
 - You are free to apply all technologies, frameworks or programming languages to complete this app.
+
+## My Solution
+
+### Status
+
+|                          Permission                          |                             Sort                             |                            Search                            |                           OpenFile                           |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![Permission](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/Permission.gif) | ![sort](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/sort.gif) | ![search](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/search.gif) | ![openFile](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/openFile.gif) |
+
+
+
+### Architect
+
+
+
+ ![diagram](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/diagram.png)

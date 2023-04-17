@@ -71,7 +71,7 @@ fun Header(
                 .align(Alignment.TopEnd)
                 .alpha(alphaMenusRight)
                 .wrapContentSize(Alignment.TopStart)) {
-            Text(text = "Name", style = MaterialTheme.typography.titleMedium, modifier = Modifier.clickable {
+            Text(text = selectedModeRight, style = MaterialTheme.typography.titleMedium, modifier = Modifier.clickable {
                 expandedRight = true
             } )
             MyMenuPopupState(expandedRight,
