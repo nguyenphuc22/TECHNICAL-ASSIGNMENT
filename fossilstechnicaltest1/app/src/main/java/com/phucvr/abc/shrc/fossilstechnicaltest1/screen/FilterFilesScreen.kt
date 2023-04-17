@@ -11,6 +11,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.components.Header
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.SearchBar
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.TopAppBar
+import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
@@ -63,7 +64,7 @@ fun FilterFilesScreen(viewModel: FilterViewModel) {
 
         Spacer(modifier = Modifier.size(15.dp))
 
-        ListCard(list = listFiles,false) {
+        ListCard(list = listFiles, listSelected = listFiles,false) {
             if (it.isFolder()) {
                 viewModel.onClickFolder(it)
             } else {

@@ -24,6 +24,10 @@ class Settings {
         const val OPTION_VIEW = "View"
         const val OPTION_CREATE_FOLDER = "Trash"
         const val OPTION_SETTINGS = "Settings"
+        const val OPTION_MOVE = "Movie"
+        const val OPTION_COPY = "Copy"
+        const val OPTION_DELETE = "Delete"
+        const val OPTION_INFO = "Info"
 
         val LIST_MENU_OPTION = listOf<String>(OPTION_EDIT)
     }

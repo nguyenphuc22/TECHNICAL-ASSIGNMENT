@@ -8,4 +8,6 @@ interface iRepository {
     fun getAllStorage() : ArrayList<iFile>
 
     fun getData() : ArrayList<iFile>
+
+    fun moveFiles( list : List<iFile> , pathTo : String )
 }

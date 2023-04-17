@@ -22,8 +22,8 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilConvert
 
 @Composable
-fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}) {
-    var stateButton by remember { mutableStateOf(false) }
+fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}, isSelected : Boolean = false) {
+    var stateButton by remember { mutableStateOf(isSelected) }
 
     Row(modifier = Modifier
         .background(Color.White)
@@ -36,8 +36,6 @@ fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}) {
         }) {
 
         if (actionSate) {
-
-
             RadioButton(selected = stateButton, onClick = { stateButton = !stateButton }, colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary))
 
             Spacer(modifier = Modifier.width(10.dp))

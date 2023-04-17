@@ -15,6 +15,8 @@ interface iFile {
 
     fun getSize() : Long
 
+    fun getFullName() : String
+
     fun isFile() : Boolean
 
     fun isFolder() : Boolean

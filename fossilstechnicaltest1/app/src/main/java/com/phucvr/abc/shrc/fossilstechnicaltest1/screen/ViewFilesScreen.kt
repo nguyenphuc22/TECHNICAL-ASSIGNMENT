@@ -1,6 +1,10 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.screen
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import android.os.Environment
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,28 +19,30 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import com.phucvr.abc.shrc.fossilstechnicaltest1.components.Header
-import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
-import com.phucvr.abc.shrc.fossilstechnicaltest1.components.MyBottomAppBar
-import com.phucvr.abc.shrc.fossilstechnicaltest1.components.TopAppBar
+import com.phucvr.abc.shrc.fossilstechnicaltest1.components.*
+import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
 
 
-@SuppressLint("MutableCollectionMutableState")
+@SuppressLint("MutableCollectionMutableState", "UnrememberedMutableState")
 @Composable
-fun ViewFilesScreen(viewModel: MainViewModel) {
+fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
     val listFiles = viewModel.listData
     val menusLeft = viewModel.getMenuLeft()
     val menusRight = viewModel.getMenuRight()
     var alphaLeft = viewModel.isShowLeftMenus.value
     var alphaRight = viewModel.isShowRightMenus.value
     var actionState by remember { mutableStateOf(false) }
+    var listSelected = viewModel.listSelected
+    var actionSelectPath by remember { mutableStateOf(false) }
+
     Box(Modifier.fillMaxSize()) {
         Column(modifier = Modifier
             .fillMaxSize()
@@ -65,6 +71,7 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
                     when(it) {
                         Settings.OPTION_EDIT -> {
                             actionState = true
+                            listSelected.clear()
                         }
                     }
                 }
@@ -96,8 +103,14 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
 
             Spacer(modifier = Modifier.size(15.dp))
 
-            ListCard(list = listFiles,actionState) {
-                if (!actionState) {
+            ListCard(list = listFiles,listSelected = listSelected,actionState) {
+                if (actionState) {
+                    if (listSelected.contains(it)) {
+                        listSelected.remove(it)
+                    } else {
+                        listSelected.add(it)
+                    }
+                } else {
                     if (it.isFolder()) {
                         viewModel.onClickFolder(it)
                     } else {
@@ -115,7 +128,38 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
             }
         }
 
-        MyBottomAppBar(modifier = Modifier.fillMaxWidth().align(Alignment.BottomStart), isShow = actionState)
+        MyBottomAppBar(modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.BottomStart), isShow = actionState ,
+            onClickIcons =  {
+                when(it) {
+                    Settings.OPTION_MOVE -> {
+                        actionState = false
+                        actionSelectPath = true
+                    }
+                }
+            }
+        )
+
+        if (actionSelectPath) {
+            MyBottomAppBarAction(modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomStart), listSelected = listSelected, isShow = true, action = Settings.OPTION_MOVE,
+                    onClickIcons = {
+                        actionSelectPath = false
+                        if (it) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                                if (!Environment.isExternalStorageManager()) {
+                                    val intent = Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                                    ContextCompat.startActivity(context, intent, null)
+                                } else {
+                                    viewModel.moveFiles(listSelected)
+                                }
+                            }
+                        }
+                    }
+                )
+        }
     }
 
 

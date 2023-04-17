@@ -62,6 +62,10 @@ class FileManager private constructor(){
         return result
     }
 
+    fun moveFiles(list : List<iFile>, path : String) {
+
+    }
+
     fun isRootFolder(): Boolean {
         return this.stackCurrentPath.size == 1 || this.stackCurrentPath.isEmpty()
     }

@@ -2,9 +2,13 @@ package com.phucvr.abc.shrc.fossilstechnicaltest1.routing
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
 import android.widget.Toast
-import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.*
+import androidx.core.content.ContextCompat.startActivity
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
@@ -15,6 +19,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilPermission
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.FilterViewModel
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
+
 
 class MyRouter private constructor() {
 
@@ -51,7 +56,7 @@ fun ManagerScreen(viewModel: MainViewModel, context: Context, callBackOpenFile: 
                 }
                 viewModel.sort()
             }
-            ViewFilesScreen(viewModel)
+            ViewFilesScreen(viewModel,context)
 
             viewModel.callBackFile {
                 callBackOpenFile(it)

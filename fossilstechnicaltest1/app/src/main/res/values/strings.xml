@@ -6,4 +6,5 @@
     <string name="permission_granted">Permission has been granted</string>
     <string name="permission_denied">Permission has been denied</string>
     <string name="empty_folder">This folder is empty</string>
+    <string name="cancel">Cancel</string>
 </resources>

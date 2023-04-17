@@ -78,6 +78,10 @@ class File : iFile {
         return null
     }
 
+    override fun getFullName(): String {
+        return getName()
+    }
+
     override fun findWithName(name: String): List<iFile> {
         if (this.name.contains(name))
             return listOf(this)

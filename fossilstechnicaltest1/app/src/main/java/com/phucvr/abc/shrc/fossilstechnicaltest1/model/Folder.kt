@@ -111,6 +111,10 @@ class Folder : iFile {
         return result
     }
 
+    override fun getFullName(): String {
+        return getName()
+    }
+
     fun add(file : iFile) {
         this.children.add(file)
     }

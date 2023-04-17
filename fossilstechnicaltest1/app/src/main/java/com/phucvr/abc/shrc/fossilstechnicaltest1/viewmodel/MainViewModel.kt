@@ -21,6 +21,7 @@ open class MainViewModel(private val repository: iRepository) : ViewModel(), iOn
     }
 
     val listData = mutableStateListOf<iFile>()
+    val listSelected = mutableStateListOf<iFile>()
     val fileManager = FileManager.getInstance()
     private var isIncreasedSort = true
     private var TYPE_SORT = TypeSort.NAME
@@ -160,6 +161,14 @@ open class MainViewModel(private val repository: iRepository) : ViewModel(), iOn
         }
     }
 
+    fun moveFiles(list : List<iFile>, pathTo : String) {
+        this.repository.moveFiles(list, pathTo)
+    }
+
+    fun moveFiles(list : List<iFile>) {
+        this.repository.moveFiles(list, this.fileManager.currentPath())
+    }
+
     fun hideRightMenus() {
         this.isShowRightMenus.value = 0.0F
     }
@@ -174,6 +183,10 @@ open class MainViewModel(private val repository: iRepository) : ViewModel(), iOn
 
     fun showLeftMenus() {
         this.isShowLeftMenus.value = 1.0F
+    }
+
+    fun getCurrentPath() {
+        this.fileManager.currentPath()
     }
 
     fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {
