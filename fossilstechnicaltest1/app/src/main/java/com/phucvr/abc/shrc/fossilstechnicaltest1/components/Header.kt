@@ -52,7 +52,7 @@ fun Header(
             .alpha(alphaMenusLeft)
             .clickable { expandedLeft = true }) {
             Text(text = selectedModeLeft, style = MaterialTheme.typography.titleMedium)
-            MyMenuPopup(expandedLeft,
+            MyMenuPopupState(expandedLeft,
                 listMenuItemLeft,
                 selectedModeLeft,
                 selectedChanged = {selectedModeLeft = it},
@@ -74,7 +74,7 @@ fun Header(
             Text(text = "Name", style = MaterialTheme.typography.titleMedium, modifier = Modifier.clickable {
                 expandedRight = true
             } )
-            MyMenuPopup(expandedRight,
+            MyMenuPopupState(expandedRight,
                 listMenuItemRight,
                 selectedModeRight,
                 selectedChanged = { selectedModeRight = it},

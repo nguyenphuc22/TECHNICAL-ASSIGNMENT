@@ -19,6 +19,13 @@ class Settings {
         val EXTENSION_PICTURE = listOf<String>("jpg","png")
 
         val LIST_FOLDER_ESSENTIAL = listOf<String>("DCIM","Document","Download","Movies","Music","Notifications","Pictures","Recordings","Ringtones")
+
+        const val OPTION_EDIT = "Edit"
+        const val OPTION_VIEW = "View"
+        const val OPTION_CREATE_FOLDER = "Trash"
+        const val OPTION_SETTINGS = "Settings"
+
+        val LIST_MENU_OPTION = listOf<String>(OPTION_EDIT)
     }
 }
 

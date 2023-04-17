@@ -10,7 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 @Composable
-fun MyMenuPopup(expanded: Boolean, list: List<String> , selected : String ,onTurnOff : (Boolean) -> Unit = {} ,selectedChanged : (String) -> Unit = {}) {
+fun MyMenuPopupState(expanded: Boolean, list: List<String> , selected : String ,onTurnOff : (Boolean) -> Unit = {} ,selectedChanged : (String) -> Unit = {}) {
     DropdownMenu(
         expanded = expanded,
         onDismissRequest = { onTurnOff(false) }
@@ -32,6 +32,23 @@ fun MyMenuPopup(expanded: Boolean, list: List<String> , selected : String ,onTur
                 })
             }
 
+        }
+    }
+}
+
+@Composable
+fun MyMenuPopupNoState(expanded: Boolean, list: List<String>,onTurnOff : (Boolean) -> Unit = {} ,selectedChanged : (String) -> Unit = {}) {
+    DropdownMenu(
+        expanded = expanded,
+        onDismissRequest = { onTurnOff(false) }
+    ) {
+        for (item in list) {
+            DropdownMenuItem(content = {
+                Text(text = item)
+            }, onClick = {
+                selectedChanged(item)
+                onTurnOff(false)
+            })
         }
     }
 }

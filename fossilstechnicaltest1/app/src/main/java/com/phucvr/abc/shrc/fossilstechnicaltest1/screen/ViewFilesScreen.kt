@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.TopAppBar
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
+import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
 
 
 @SuppressLint("MutableCollectionMutableState")
@@ -32,6 +33,7 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
         .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
 
         TopAppBar(
+            listMenu = Settings.LIST_MENU_OPTION,
 
             onClickIconBack =  {
                 viewModel.backStack()
@@ -39,6 +41,14 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
 
             onClickIconSearch = {
                 MyRouter.getInstance().navigateTo(Screen.FILTER_FILES)
+            },
+
+            onClickOption = {
+                when(it) {
+                    Settings.OPTION_EDIT -> {
+
+                    }
+                }
             }
 
         )
