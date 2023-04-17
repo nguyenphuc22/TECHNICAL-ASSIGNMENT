@@ -46,8 +46,6 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
             .background(Color.White)
             .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
 
-            Text(text = listSelected.size.toString())
-            
             TopAppBar(
                 listMenu = Settings.LIST_MENU_OPTION,
 

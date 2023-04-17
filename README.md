@@ -27,9 +27,9 @@ REQUIREMENT
 
 ------
 
-|                         Delete Files                         |                          Copy Files                          |                          Move Files                          |      |
-| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | ---- |
-| ![deleteFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/deleteFiles.gif) | ![CopyFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/CopyFiles.gif) | ![moveFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/moveFiles.gif) |      |
+|                         Delete Files                         |                          Copy Files                          |                          Move Files                          |                           Details                            |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
+| ![deleteFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/deleteFiles.gif) | ![CopyFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/CopyFiles.gif) | ![moveFiles](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/moveFiles.gif) | ![Details](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/Details.gif) |
 
 
 
