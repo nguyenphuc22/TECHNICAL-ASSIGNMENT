@@ -42,6 +42,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
     var actionState by remember { mutableStateOf(false) }
     var listSelected = viewModel.listSelected
     var actionSelectPath by remember { mutableStateOf(false) }
+    var actionName by remember { mutableStateOf(Settings.OPTION_MOVE) }
 
     Box(Modifier.fillMaxSize()) {
         Column(modifier = Modifier
@@ -68,11 +69,13 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
                 },
 
                 onClickOption = {
+
                     when(it) {
                         Settings.OPTION_EDIT -> {
                             actionState = true
                             listSelected.clear()
                         }
+
                     }
                 }
 
@@ -132,8 +135,9 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
             .fillMaxWidth()
             .align(Alignment.BottomStart), isShow = actionState ,
             onClickIcons =  {
+                actionName = it
                 when(it) {
-                    Settings.OPTION_MOVE -> {
+                    Settings.OPTION_MOVE, Settings.OPTION_COPY, Settings.OPTION_DELETE -> {
                         actionState = false
                         actionSelectPath = true
                     }
@@ -144,7 +148,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
         if (actionSelectPath) {
             MyBottomAppBarAction(modifier = Modifier
                 .fillMaxWidth()
-                .align(Alignment.BottomStart), listSelected = listSelected, isShow = true, action = Settings.OPTION_MOVE,
+                .align(Alignment.BottomStart), listSelected = listSelected, isShow = true, action = actionName,
                     onClickIcons = {
                         actionSelectPath = false
                         if (it) {
@@ -153,7 +157,21 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
                                     val intent = Intent(android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
                                     ContextCompat.startActivity(context, intent, null)
                                 } else {
-                                    viewModel.moveFiles(listSelected)
+                                    when(actionName) {
+                                        Settings.OPTION_MOVE -> {
+                                            viewModel.moveFiles(listSelected)
+                                            viewModel.refreshData()
+                                        }
+                                        Settings.OPTION_DELETE -> {
+                                            viewModel.deleteFile(listSelected)
+                                            viewModel.refreshData()
+                                        }
+                                        Settings.OPTION_COPY -> {
+                                            viewModel.copyFiles(listSelected)
+                                            viewModel.refreshData()
+                                        }
+                                    }
+
                                 }
                             }
                         }

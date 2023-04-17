@@ -161,12 +161,20 @@ open class MainViewModel(private val repository: iRepository) : ViewModel(), iOn
         }
     }
 
+    fun copyFiles(list: List<iFile>) {
+        this.repository.copyFiles(list,this.fileManager.currentPath())
+    }
+
     fun moveFiles(list : List<iFile>, pathTo : String) {
         this.repository.moveFiles(list, pathTo)
     }
 
     fun moveFiles(list : List<iFile>) {
         this.repository.moveFiles(list, this.fileManager.currentPath())
+    }
+
+    fun deleteFile(list : List<iFile>) {
+        this.repository.deleteFiles(list)
     }
 
     fun hideRightMenus() {

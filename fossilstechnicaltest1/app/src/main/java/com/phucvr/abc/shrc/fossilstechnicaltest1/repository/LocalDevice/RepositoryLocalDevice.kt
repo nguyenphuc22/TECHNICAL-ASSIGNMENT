@@ -1,5 +1,6 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice
 
+import android.icu.util.Output
 import android.os.Environment
 import android.util.Log
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
@@ -76,7 +77,71 @@ class RepositoryLocalDevice : iRepository {
         } catch (fnfe1: FileNotFoundException) {
             Log.e(TAG,"${fnfe1.message}")
         } catch (e: Exception) {
-            Log.e(TAG,"${e.message!!}", )
+            Log.e(TAG, "${e.message!!}")
+        }
+    }
+
+    override fun deleteFiles(list: List<iFile>) {
+        deleteFile(list)
+    }
+
+    fun deleteFile(list : List<iFile>) {
+        for (iFile in list) {
+            deleteFile(iFile)
+        }
+    }
+
+    fun deleteFile(file: iFile) {
+        deleteFile(file.getPath())
+    }
+
+    private fun deleteFile(outputPath: String) {
+        try {
+            // delete the original file
+            File(outputPath).delete()
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, e.message!!)
+        }
+    }
+
+    override fun copyFiles(list: List<iFile>, pathTo: String) {
+        for (iFile in list) {
+            copyFile(iFile,pathTo)
+        }
+    }
+
+    fun copyFile(iFile: iFile, pathTo: String) {
+        copyFile(iFile.getPath(),iFile.getFullName(),pathTo)
+    }
+
+    private fun copyFile(inputPath: String, inputFile: String, outputPath: String) {
+        var Input: InputStream? = null
+        var Output: OutputStream? = null
+        try {
+
+            //create output directory if it doesn't exist
+            val dir = File(outputPath)
+            if (!dir.exists()) {
+                dir.mkdirs()
+            }
+            Input = FileInputStream(inputPath)
+            Output = FileOutputStream(outputPath + "/" + inputFile)
+            val buffer = ByteArray(1024)
+            var read: Int
+            while (Input.read(buffer).also { read = it } != -1) {
+                Output.write(buffer, 0, read)
+            }
+            Input.close()
+            Input = null
+
+            // write the output file (You have now copied the file)
+            Output.flush()
+            Output.close()
+            Output = null
+        } catch (fnfe1: FileNotFoundException) {
+            Log.e(TAG, fnfe1.message!!)
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, e.message!!)
         }
     }
 

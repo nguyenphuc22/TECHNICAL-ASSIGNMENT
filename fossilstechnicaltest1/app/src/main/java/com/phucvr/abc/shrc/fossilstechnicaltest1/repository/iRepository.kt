@@ -10,4 +10,8 @@ interface iRepository {
     fun getData() : ArrayList<iFile>
 
     fun moveFiles( list : List<iFile> , pathTo : String )
+
+    fun deleteFiles( list : List<iFile> )
+
+    fun copyFiles( list: List<iFile>, pathTo: String)
 }
