@@ -8,18 +8,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 
 @Composable
-fun EmptyScreen() {
+fun EmptyScreen(string: String) {
     Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = stringResource(id = R.string.empty_folder), style = MaterialTheme.typography.titleLarge, modifier = Modifier.align(Alignment.Center))
+        Text(text = string, style = MaterialTheme.typography.titleLarge, modifier = Modifier.align(Alignment.Center), textAlign = TextAlign.Center)
     }
 }
 
 @Preview
 @Composable
 fun EmptyScreenPreview() {
-    EmptyScreen()
+    EmptyScreen("Not Thing")
 }

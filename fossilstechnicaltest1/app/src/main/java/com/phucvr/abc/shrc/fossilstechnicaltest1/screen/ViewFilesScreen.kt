@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 import androidx.compose.ui.unit.dp
@@ -70,13 +71,13 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
 
                 onClickOption = {
 
-                    when(it) {
-                        Settings.OPTION_EDIT -> {
-                            actionState = true
-                            listSelected.clear()
-                        }
-
-                    }
+//                    when(it) {
+//                        Settings.OPTION_EDIT -> {
+//                            actionState = true
+//                            listSelected.clear()
+//                        }
+//
+//                    }
                 }
 
             )
@@ -124,7 +125,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
             }
 
             if (viewModel.listData.isEmpty()) {
-                EmptyScreen()
+                EmptyScreen(stringResource(id = R.string.empty_folder))
                 viewModel.hideRightMenus()
             } else {
                 viewModel.showRightMenus()

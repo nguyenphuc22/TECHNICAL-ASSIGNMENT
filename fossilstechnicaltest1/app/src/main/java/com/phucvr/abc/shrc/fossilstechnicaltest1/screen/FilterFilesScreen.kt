@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.Header
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.SearchBar
@@ -73,7 +75,7 @@ fun FilterFilesScreen(viewModel: FilterViewModel) {
         }
 
         if (viewModel.listData.isEmpty()) {
-            EmptyScreen()
+            EmptyScreen(stringResource(id = R.string.empty_keyword))
             viewModel.hideRightMenus()
             viewModel.hideLeftMenus()
         } else {
