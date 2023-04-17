@@ -8,17 +8,10 @@ import android.os.Environment
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.BottomAppBar
-import androidx.compose.material.Icon
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
@@ -26,7 +19,6 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.*
-import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
@@ -44,6 +36,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
     var listSelected = viewModel.listSelected
     var actionSelectPath by remember { mutableStateOf(false) }
     var actionName by remember { mutableStateOf(Settings.OPTION_MOVE) }
+    var isShowDialog by remember { mutableStateOf(false) }
 
     Box(Modifier.fillMaxSize()) {
         Column(modifier = Modifier
@@ -143,9 +136,18 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
                         actionState = false
                         actionSelectPath = true
                     }
+                    Settings.OPTION_INFO -> {
+                        isShowDialog = true
+                    }
                 }
             }
         )
+
+        if (isShowDialog) {
+            DialogDetails(listFiles) {
+                isShowDialog = false
+            }
+        }
 
         if (actionSelectPath) {
             MyBottomAppBarAction(modifier = Modifier

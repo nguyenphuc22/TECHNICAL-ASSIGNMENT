@@ -8,4 +8,7 @@
     <string name="empty_folder">This folder is empty</string>
     <string name="empty_keyword">There are no folders or files matching this keyword</string>
     <string name="cancel">Cancel</string>
+    <string name="details">Details</string>
+    <string name="totalSize">Total size (all folders and files)</string>
+    <string name="contains">Contains</string>
 </resources>
