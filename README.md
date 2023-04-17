@@ -25,6 +25,12 @@ REQUIREMENT
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
 | ![Permission](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/Permission.gif) | ![sort](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/sort.gif) | ![search](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/search.gif) | ![openFile](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/openFile.gif) |
 
+------
+
+|                         Delete Files                         |                          Copy Files                          |                          Move Files                          |      |
+| :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | ---- |
+| ![deleteFiles](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/deleteFiles.gif) | ![CopyFiles](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/CopyFiles.gif) | ![moveFiles](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/moveFiles.gif) |      |
+
 
 
 ### Architect
