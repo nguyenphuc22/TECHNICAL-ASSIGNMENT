@@ -27,6 +27,7 @@ open class MainViewModel(private val repository: iRepository) : ViewModel(), iOn
     private var callBack: (iFile) -> Unit = {}
 
 
+
     private val menusLeft = listOf(MODE_LIST_ESSENTIAL,MODE_LIST_ALL)
     private val menusRight = listOf(TypeSort.TYPE.name,TypeSort.DATE.name,TypeSort.NAME.name,TypeSort.SIZE.name)
     private var modeList = menusLeft.first()

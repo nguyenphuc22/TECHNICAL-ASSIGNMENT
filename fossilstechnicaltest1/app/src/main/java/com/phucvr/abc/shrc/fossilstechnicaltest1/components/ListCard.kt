@@ -18,10 +18,10 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 @Composable
-fun ListCard(list : SnapshotStateList<iFile>, onClickCard: (iFile) -> Unit = {}) {
+fun ListCard(list : SnapshotStateList<iFile>, actionStateList : Boolean, onClickCard: (iFile) -> Unit = {}) {
     LazyColumn {
         this.items(list) { iFile ->
-            Card(file = iFile) {
+            Card(file = iFile,actionStateList) {
                 onClickCard(it)
             }
         }
@@ -39,5 +39,5 @@ fun ListCardPreview() {
     arrayList.add(b)
     val mutableList = mutableStateListOf<iFile>()
     mutableList.addAll(arrayList)
-    ListCard(mutableList)
+    ListCard(mutableList,true)
 }

@@ -63,7 +63,7 @@ fun FilterFilesScreen(viewModel: FilterViewModel) {
 
         Spacer(modifier = Modifier.size(15.dp))
 
-        ListCard(list = listFiles) {
+        ListCard(list = listFiles,false) {
             if (it.isFolder()) {
                 viewModel.onClickFolder(it)
             } else {

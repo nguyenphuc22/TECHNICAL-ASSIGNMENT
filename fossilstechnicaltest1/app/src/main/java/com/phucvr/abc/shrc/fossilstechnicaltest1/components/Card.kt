@@ -4,13 +4,16 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonColors
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
@@ -19,17 +22,31 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilConvert
 
 @Composable
-fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
+fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}) {
+    var stateButton by remember { mutableStateOf(false) }
+
     Row(modifier = Modifier
         .background(Color.White)
         .padding(top = 8.dp, bottom = 8.dp)
         .fillMaxWidth()
         .height(IntrinsicSize.Min)
-        .clickable { onClickCard(file) }) {
+        .clickable {
+            onClickCard(file)
+            stateButton = !stateButton
+        }) {
+
+        if (actionSate) {
+
+
+            RadioButton(selected = stateButton, onClick = { stateButton = !stateButton }, colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary))
+
+            Spacer(modifier = Modifier.width(10.dp))
+        }
 
         CardImage(file)
 
-        Column(modifier = Modifier.fillMaxWidth()
+        Column(modifier = Modifier
+            .fillMaxWidth()
             .fillMaxHeight())
         {
 
@@ -73,11 +90,14 @@ fun Card(file: iFile, onClickCard: (iFile) -> Unit = {}) {
 
         }
 
+
+
+
     }
 }
 
 @Preview
 @Composable
 private fun CardReview() {
-    Card(File("AUDIO",1000,7,"Nick/Phuc/Phuc","BBHHHJ/asddsa",""))
+    Card(File("AUDIO",1000,7,"Nick/Phuc/Phuc","BBHHHJ/asddsa",""),true)
 }
