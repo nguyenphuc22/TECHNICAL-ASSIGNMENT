@@ -26,11 +26,16 @@ import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import coil.imageLoader
 import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
+import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.ManagerScreen
+import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
+import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
+import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.FilterFilesScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.PermissionScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.screen.ViewFilesScreen
 import com.phucvr.abc.shrc.fossilstechnicaltest1.ui.theme.FossilsTechnicalTest1Theme
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilIntent
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilPermission.Companion.isPermissionGranted
+import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.FilterViewModel
 import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
@@ -44,6 +49,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private val viewModel : MainViewModel = MainViewModel(RepositoryLocalDevice())
+
     @SuppressLint("PermissionLaunchedDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,31 +60,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var permission by remember {
-                        mutableStateOf(isPermissionGranted(context = this, Manifest.permission.READ_EXTERNAL_STORAGE))
-                    }
-
-                    PermissionScreen(context = this,Manifest.permission.READ_EXTERNAL_STORAGE) { isPermissionGranted ->
-                        permission = isPermissionGranted
-                        if (isPermissionGranted) {
-                            Toast.makeText(this, this.getString(R.string.permission_granted),Toast.LENGTH_SHORT).show()
-                        } else {
-                            Toast.makeText(this,this.getString(R.string.permission_denied),Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    if (permission == true) {
-                        viewModel.getAllData()
-                        LaunchedEffect(true) {
-                            if (viewModel.isModeEssentials()) {
-                                viewModel.turnOnModeEssentials()
-                            } else {
-                                viewModel.turnOffModeEssentials()
-                            }
-                            viewModel.sort()
-                        }
-                        ViewFilesScreen(viewModel)
-                    }
+                    ManagerScreen(viewModel,this)
                 }
             }
         }

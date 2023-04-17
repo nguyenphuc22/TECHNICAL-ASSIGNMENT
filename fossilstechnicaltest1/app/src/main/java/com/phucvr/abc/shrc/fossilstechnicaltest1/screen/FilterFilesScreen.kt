@@ -1,48 +1,43 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.screen
 
-import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.Header
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.ListCard
-import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
-import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
-import androidx.compose.ui.unit.dp
+import com.phucvr.abc.shrc.fossilstechnicaltest1.components.SearchBar
 import com.phucvr.abc.shrc.fossilstechnicaltest1.components.TopAppBar
+import com.phucvr.abc.shrc.fossilstechnicaltest1.repository.LocalDevice.RepositoryLocalDevice
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.MyRouter
 import com.phucvr.abc.shrc.fossilstechnicaltest1.routing.Screen
+import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
+import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.FilterViewModel
+import com.phucvr.abc.shrc.fossilstechnicaltest1.viewmodel.MainViewModel
 
-
-@SuppressLint("MutableCollectionMutableState")
 @Composable
-fun ViewFilesScreen(viewModel: MainViewModel) {
+fun FilterFilesScreen(viewModel: FilterViewModel) {
     val listFiles = viewModel.listData
     val menusLeft = viewModel.getMenuLeft()
     val menusRight = viewModel.getMenuRight()
     var alphaLeft = viewModel.isShowLeftMenus.value
     var alphaRight = viewModel.isShowRightMenus.value
+    var text by remember { mutableStateOf("") }
+
     Column(modifier = Modifier
         .fillMaxSize()
         .background(Color.White)
         .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
 
-        TopAppBar(
-
-            onClickIconBack =  {
-                viewModel.backStack()
-            },
-
-            onClickIconSearch = {
-                MyRouter.getInstance().navigateTo(Screen.FILTER_FILES)
-            }
-
+        SearchBar(text = text,
+            onBackClicked = { MyRouter.getInstance().navigateTo(Screen.VIEW_FILES)},
+            onTextChange = { text = it },
+            onSearchClicked = { viewModel.filterFiles(it) }
         )
-        
+
         Spacer(modifier = Modifier.size(15.dp))
 
         Header(
@@ -79,13 +74,15 @@ fun ViewFilesScreen(viewModel: MainViewModel) {
         if (viewModel.listData.isEmpty()) {
             EmptyScreen()
             viewModel.hideRightMenus()
+            viewModel.hideLeftMenus()
         } else {
             viewModel.showRightMenus()
+            viewModel.showLeftMenus()
+
         }
     }
 
     BackHandler {
         viewModel.backStack()
     }
-
 }

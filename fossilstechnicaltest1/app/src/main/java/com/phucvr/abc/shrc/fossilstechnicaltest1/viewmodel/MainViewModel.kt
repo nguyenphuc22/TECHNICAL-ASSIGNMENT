@@ -12,7 +12,7 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.util.Settings
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.TypeSort
 
 
-class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClickFolder{
+open class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClickFolder{
 
     companion object {
         private val TAG = MainViewModel::class.java.simpleName
@@ -112,9 +112,9 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
 
     fun showOnOffMenusLeft() {
         if (fileManager.isRootFolder()) {
-            isShowLeftMenus.value = 1.0F
+            showLeftMenus()
         } else {
-            isShowLeftMenus.value = 0.0F
+            hideLeftMenus()
         }
     }
 
@@ -165,6 +165,14 @@ class MainViewModel(private val repository: iRepository) : ViewModel(), iOnClick
 
     fun showRightMenus() {
         this.isShowRightMenus.value = 1.0F
+    }
+
+    fun hideLeftMenus() {
+        this.isShowLeftMenus.value = 0.0F
+    }
+
+    fun showLeftMenus() {
+        this.isShowLeftMenus.value = 1.0F
     }
 
     fun sort(typeSort: TypeSort? = null, isIncreased: Boolean? = null) {

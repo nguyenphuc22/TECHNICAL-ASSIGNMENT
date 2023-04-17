@@ -48,6 +48,20 @@ class FileManager private constructor(){
         return allData.first()
     }
 
+    fun findAllFilesWithName(name : String) : ArrayList<iFile> {
+        val result = ArrayList<iFile>()
+
+        for (iFile in this.allData) {
+            iFile.findWithName(name).let {
+                if (it.isNotEmpty()) {
+                    result.addAll(it)
+                }
+            }
+        }
+
+        return result
+    }
+
     fun isRootFolder(): Boolean {
         return this.stackCurrentPath.size == 1 || this.stackCurrentPath.isEmpty()
     }

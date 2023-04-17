@@ -96,6 +96,21 @@ class Folder : iFile {
         return null
     }
 
+    override fun findWithName(name: String): List<iFile> {
+        val result = ArrayList<iFile>()
+
+        if (this.name.contains(name))
+            result.add(this)
+
+        for (iFile in this.children) {
+            val temp = iFile.findWithName(name)
+            if (temp.isNotEmpty() )
+                result.addAll(temp)
+        }
+
+        return result
+    }
+
     fun add(file : iFile) {
         this.children.add(file)
     }

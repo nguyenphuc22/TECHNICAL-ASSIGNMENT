@@ -77,4 +77,10 @@ class File : iFile {
             return this
         return null
     }
+
+    override fun findWithName(name: String): List<iFile> {
+        if (this.name.contains(name))
+            return listOf(this)
+        return listOf()
+    }
 }

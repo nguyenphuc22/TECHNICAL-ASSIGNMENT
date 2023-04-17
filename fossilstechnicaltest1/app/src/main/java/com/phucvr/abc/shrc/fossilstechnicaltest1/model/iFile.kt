@@ -20,4 +20,6 @@ interface iFile {
     fun isFolder() : Boolean
 
     fun findWithPath(path : String) : iFile?
+
+    fun findWithName(name : String) : List<iFile>
 }
