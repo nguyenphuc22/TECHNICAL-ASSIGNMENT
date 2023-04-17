@@ -48,6 +48,9 @@ class RepositoryLocalDevice : iRepository {
     }
 
     private fun moveFile(inputPath: String, inputFile: String, outputPath: String) {
+        if (inputPath.equals(outputPath + "/" + inputFile))  {
+            return
+        }
         var input: InputStream? = null
         var output: OutputStream? = null
         try {
@@ -115,6 +118,10 @@ class RepositoryLocalDevice : iRepository {
     }
 
     private fun copyFile(inputPath: String, inputFile: String, outputPath: String) {
+        var name : String = inputFile
+        if (inputPath.equals(outputPath + "/" + name))  {
+            name = "1" + name
+        }
         var Input: InputStream? = null
         var Output: OutputStream? = null
         try {
@@ -125,7 +132,7 @@ class RepositoryLocalDevice : iRepository {
                 dir.mkdirs()
             }
             Input = FileInputStream(inputPath)
-            Output = FileOutputStream(outputPath + "/" + inputFile)
+            Output = FileOutputStream(outputPath + "/" + name)
             val buffer = ByteArray(1024)
             var read: Int
             while (Input.read(buffer).also { read = it } != -1) {
