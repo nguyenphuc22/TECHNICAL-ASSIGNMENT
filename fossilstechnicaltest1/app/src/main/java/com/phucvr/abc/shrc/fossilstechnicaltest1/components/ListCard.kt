@@ -1,34 +1,24 @@
 package com.phucvr.abc.shrc.fossilstechnicaltest1.components
 
 import android.annotation.SuppressLint
-import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.Divider
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.tooling.preview.Preview
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.File
-import com.phucvr.abc.shrc.fossilstechnicaltest1.model.Folder
 import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 
 @Composable
 fun ListCard(list : SnapshotStateList<iFile>,listSelected : SnapshotStateList<iFile>, actionStateList : Boolean, onClickCard: (iFile) -> Unit = {}) {
+
     LazyColumn {
         this.itemsIndexed(list) { index , iFile ->
-            if (listSelected.isEmpty()) {
-                Card(file = iFile,actionStateList, isSelected = false, onClickCard = {onClickCard(it)})
-            } else {
-                Card(file = iFile,actionStateList, isSelected = listSelected.contains(list.get(index)), onClickCard = {onClickCard(it)})
-            }
+            Card(file = iFile,actionStateList, isSelected = listSelected, onClickCard = {onClickCard(it)})
         }
     }
+
 }
 
 @SuppressLint("UnrememberedMutableState")

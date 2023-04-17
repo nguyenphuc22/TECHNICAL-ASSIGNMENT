@@ -52,6 +52,8 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
             .background(Color.White)
             .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
 
+            Text(text = listSelected.size.toString())
+            
             TopAppBar(
                 listMenu = Settings.LIST_MENU_OPTION,
 
@@ -71,13 +73,13 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
 
                 onClickOption = {
 
-//                    when(it) {
-//                        Settings.OPTION_EDIT -> {
-//                            actionState = true
-//                            listSelected.clear()
-//                        }
-//
-//                    }
+                    when(it) {
+                        Settings.OPTION_EDIT -> {
+                            actionState = true
+                            listSelected.clear()
+                        }
+
+                    }
                 }
 
             )
@@ -162,14 +164,32 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
                                         Settings.OPTION_MOVE -> {
                                             viewModel.moveFiles(listSelected)
                                             viewModel.refreshData()
+                                            if (viewModel.isModeEssentials()) {
+                                                viewModel.turnOnModeEssentials()
+                                            } else {
+                                                viewModel.turnOffModeEssentials()
+                                            }
+                                            viewModel.sort()
                                         }
                                         Settings.OPTION_DELETE -> {
                                             viewModel.deleteFile(listSelected)
                                             viewModel.refreshData()
+                                            if (viewModel.isModeEssentials()) {
+                                                viewModel.turnOnModeEssentials()
+                                            } else {
+                                                viewModel.turnOffModeEssentials()
+                                            }
+                                            viewModel.sort()
                                         }
                                         Settings.OPTION_COPY -> {
                                             viewModel.copyFiles(listSelected)
                                             viewModel.refreshData()
+                                            if (viewModel.isModeEssentials()) {
+                                                viewModel.turnOnModeEssentials()
+                                            } else {
+                                                viewModel.turnOffModeEssentials()
+                                            }
+                                            viewModel.sort()
                                         }
                                     }
 

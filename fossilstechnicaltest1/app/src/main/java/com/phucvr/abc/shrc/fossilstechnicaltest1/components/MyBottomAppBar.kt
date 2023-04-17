@@ -47,7 +47,7 @@ fun MyBottomAppBarAction(modifier: Modifier, listSelected : List<iFile>, isShow:
                 Row() {
                     Icon(painter = painterResource(id = R.drawable.ic_outline_folder_24_black), contentDescription = "Localized description")
                     Spacer(modifier = Modifier.width(10.dp))
-                    Text(text = stringResource(R.string.count,  listSelected.size + 1))
+                    Text(text = stringResource(R.string.count,  listSelected.size))
                 }
             }
 

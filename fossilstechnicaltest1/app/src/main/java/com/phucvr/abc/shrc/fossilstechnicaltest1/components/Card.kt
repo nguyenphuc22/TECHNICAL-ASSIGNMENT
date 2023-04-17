@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.RadioButton
-import androidx.compose.material.RadioButtonColors
 import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
@@ -14,6 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import com.phucvr.abc.shrc.fossilstechnicaltest1.R
@@ -22,8 +22,8 @@ import com.phucvr.abc.shrc.fossilstechnicaltest1.model.iFile
 import com.phucvr.abc.shrc.fossilstechnicaltest1.util.UtilConvert
 
 @Composable
-fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}, isSelected : Boolean = false) {
-    var stateButton by remember { mutableStateOf(isSelected) }
+fun Card(file: iFile, actionSate: Boolean, onClickCard: (iFile) -> Unit = {}, isSelected: SnapshotStateList<iFile>) {
+    var stateButton = isSelected
 
     Row(modifier = Modifier
         .background(Color.White)
@@ -32,11 +32,15 @@ fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}, i
         .height(IntrinsicSize.Min)
         .clickable {
             onClickCard(file)
-            stateButton = !stateButton
         }) {
 
         if (actionSate) {
-            RadioButton(selected = stateButton, onClick = { stateButton = !stateButton }, colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary))
+            RadioButton(selected = stateButton.contains(file),
+                onClick = {
+                    onClickCard(file)
+                },
+                colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary)
+            )
 
             Spacer(modifier = Modifier.width(10.dp))
         }
@@ -97,5 +101,5 @@ fun Card(file: iFile, actionSate : Boolean, onClickCard: (iFile) -> Unit = {}, i
 @Preview
 @Composable
 private fun CardReview() {
-    Card(File("AUDIO",1000,7,"Nick/Phuc/Phuc","BBHHHJ/asddsa",""),true)
+    //Card(File("AUDIO",1000,7,"Nick/Phuc/Phuc","BBHHHJ/asddsa",""),true)
 }
