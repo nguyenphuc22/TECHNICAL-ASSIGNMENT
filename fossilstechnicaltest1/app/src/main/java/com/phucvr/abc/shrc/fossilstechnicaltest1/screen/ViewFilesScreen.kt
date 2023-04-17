@@ -8,6 +8,7 @@ import android.os.Environment
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +46,8 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
             .background(Color.White)
             .padding(start = 15.dp, end = 15.dp, top = 15.dp)) {
 
+            Text(text = listSelected.size.toString())
+            
             TopAppBar(
                 listMenu = Settings.LIST_MENU_OPTION,
 
@@ -144,7 +147,7 @@ fun ViewFilesScreen(viewModel: MainViewModel,context : Context) {
         )
 
         if (isShowDialog) {
-            DialogDetails(listFiles) {
+            DialogDetails(listSelected) {
                 isShowDialog = false
             }
         }
