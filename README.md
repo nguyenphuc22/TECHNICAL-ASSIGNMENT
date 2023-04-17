@@ -23,7 +23,7 @@ REQUIREMENT
 
 |                          Permission                          |                             Sort                             |                            Search                            |                           OpenFile                           |
 | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: |
-| ![Permission](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/Permission.gif) | ![sort](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/sort.gif) | ![search](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/search.gif) | ![openFile](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/openFile.gif) |
+| ![Permission](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/Permission.gif) | ![sort](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/sort.gif) | ![search](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/search.gif) | ![openFile](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/openFile.gif) |
 
 
 
@@ -31,7 +31,7 @@ REQUIREMENT
 
 In this project. I use MVVM architecture. This architecture will help me divide the data-logic-view into separate parts. Because this project in the future will be able to support different types of data such as data stored in the cloud. So in Respository and Core, I decided to structure it as an interface class. Objects like View - ViewModel will work through this interface. Thus, later supporting the cloud or data from new sources will be easy
 
- ![diagram](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/diagram.png)
+ ![diagram](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/diagram.png)
 
 - Components: These include single views, configuring a small component of a screen. Programmers can assemble them into a complete screen
 
@@ -39,7 +39,7 @@ In this project. I use MVVM architecture. This architecture will help me divide 
 
 - Model: Objects store information and work methods. Below is the File and Folder object diagram designed according to the composite pattern.
 
-  ![classdiagram](/Users/nguyenphuc/Documents/GitHub/TECHNICAL-ASSIGNMENT/classdiagram.png)
+  ![classdiagram](https://github.com/nguyenphuc22/TECHNICAL-ASSIGNMENT/blob/main/classdiagram.png)
 
 - Repository: This is where to query data
 
